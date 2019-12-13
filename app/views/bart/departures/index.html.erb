@@ -1,9 +1,28 @@
 <head>
-  <meta http-equiv="refresh" content="15">
+  <!-- <meta http&#45;equiv="refresh" content="15"> -->
 </head>
-<%= @LONG_FORM_DESTINATIONS.each do |long_form_destination| %>
-  <h1><%= long_form_destination %></h1>
-  <% @formatted_estimates[long_form_destination]&.each do |estimate| %>
-  <p> <%= estimate %></p>
+<ol class="departures">
+  <%= @LONG_FORM_DESTINATIONS.each do |long_form_destination| %>
+    <li class="departures-item bart--YELLOW">
+      <div class="departures-item-train">
+        <h3 class="departures-item-type">Bart</h3>
+        <span class="departures-item-destination-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <circle cx="12.001" cy="11.998" r="11.5" />
+              <path d="M15.501 14.498l-3.5-4.5-3.5 4.5h-4l7.5-9 7.5 9z" fill="#fff" />
+            </g>
+          </svg>
+        </span>
+        <h1 class="departures-item-destination-text"><%= long_form_destination %></h1>
+        <h3 class="departures-item-station">Powell St.</h3>
+      </div>
+      <div class="departures-item-time">
+        <span class="departures-item-time-label">Leave at</span>
+        <h2 class="departures-item-time-display">
+        <%= @formatted_estimates&.fetch(long_form_destination)&.fetch( "leave_at" ) %>
+        </h2>
+      </div>
+    </li>
   <% end %>
-<% end %>
+</ol>

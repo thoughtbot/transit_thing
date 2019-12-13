@@ -13,6 +13,10 @@ class Bart::DeparturesController < ApplicationController
     response = JSON.parse(Net::HTTP.get(ESTIMATES_URI))
     estimates = build_estimates(response)
     @formatted_estimates = format_estimates(estimates)
+    LONG_FORM_DESTINATIONS.each do |destination|
+      nearest_train = @formatted_estimates[destination]&.sort_by{|estimate| estimate["eta"]}&.first
+      @formatted_estimates[destination] = nearest_train
+    end
     @LONG_FORM_DESTINATIONS = LONG_FORM_DESTINATIONS
   end
 
@@ -25,6 +29,17 @@ class Bart::DeparturesController < ApplicationController
       }
 
       if match
+        match.fetch("estimate").map {|x|
+          if x["minutes"] != "LEAVING"
+            eta = x["minutes"].to_i - 10
+            leave_at = (Time.now + eta.minutes).strftime("%l:%M")
+            x["eta"] = eta
+            x["leave_at"] = leave_at
+          else
+            eta = 0
+          end
+        }
+        match.fetch("estimate").reject {|estimate| estimate["eta"] < 0}
         match.fetch("estimate").each do |estimate|
           trains << estimate.merge("destination" => match.fetch("destination"))
         end
