@@ -7,11 +7,13 @@ class Bart::DeparturesController < ApplicationController
   )
 
   DESTINATIONS = ["ANTC", "NCON", "PHIL", "PITT", "RICH", "24TH", "SFIA", "DALY", "DUBL"].freeze
+  LONG_FORM_DESTINATIONS = ["Antioch", "North Concord", "Pleasant Hill", "Pittsburg", "Richmond", "24th Street", "SFO", "Daly City", "Dublin"].freeze
 
   def index
     response = JSON.parse(Net::HTTP.get(ESTIMATES_URI))
     estimates = build_estimates(response)
     @formatted_estimates = format_estimates(estimates)
+    @LONG_FORM_DESTINATIONS = LONG_FORM_DESTINATIONS
   end
 
   def build_estimates(response)

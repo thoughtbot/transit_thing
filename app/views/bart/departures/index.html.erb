@@ -1,1 +1,9 @@
-<p> <%= @formatted_estimates %> </p>
+<head>
+  <meta http-equiv="refresh" content="15">
+</head>
+<%= @LONG_FORM_DESTINATIONS.each do |long_form_destination| %>
+  <h1><%= long_form_destination %></h1>
+  <% @formatted_estimates[long_form_destination]&.each do |estimate| %>
+  <p> <%= estimate %></p>
+  <% end %>
+<% end %>
