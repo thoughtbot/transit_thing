@@ -1,0 +1,55 @@
+.departures {
+  display: grid;
+}
+
+.departures-item {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  padding: 3vw;
+}
+
+.departures-item-destination {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: min-content 1fr;
+}
+
+.departures-item-destination-icon,
+.departures-item-destination-text {
+  color: currentColor;
+  fill: currentColor;
+}
+
+.departures-item-destination-text {
+  font-size: 5vw;
+}
+
+.departures-item-station {
+  font-size: 3vw;
+}
+
+.departures-item-station,
+.departures-item-time,
+.departures-item-type {
+  color: #232323;
+}
+
+.departures-item-time {
+  text-align: center;
+}
+
+.departures-item-time-display {
+  font-size: 5vw;
+}
+
+.departures-item-time-label {
+  font-size: 2vw;
+  letter-spacing: 0.3vw;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.departures-item-type {
+  font-size: 3vw;
+}
+
