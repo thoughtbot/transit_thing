@@ -1,7 +1,6 @@
 <head>
   <meta http-equiv="refresh" content="60">
 </head>
-
 <% if @advisory %>
   <div class="advisory">
     <p>
@@ -9,13 +8,10 @@
     </p>
   </div>
 <%end %>
-
-
 <ol class="departures">
   <% @sorted_estimates.each do |destination, estimate| %>
     <li class="departures-item bart--<%= estimate.first.fetch( "color" ) %>">
       <div class="departures-item-train">
-        <h3 class="departures-item-type">Bart</h3>
         <span class="departures-item-destination-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <g stroke-linecap="round" stroke-linejoin="round" fill="none">
