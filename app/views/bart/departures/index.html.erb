@@ -3,7 +3,7 @@
 </head>
 <ol class="departures">
   <%= @LONG_FORM_DESTINATIONS.each do |long_form_destination| %>
-    <li class="departures-item bart--YELLOW">
+    <li class="departures-item bart--<%= @formatted_estimates&.fetch(long_form_destination)&.fetch( 'color' ) %>">
       <div class="departures-item-train">
         <h3 class="departures-item-type">Bart</h3>
         <span class="departures-item-destination-icon">
@@ -20,7 +20,7 @@
       <div class="departures-item-time">
         <span class="departures-item-time-label">Leave at</span>
         <h2 class="departures-item-time-display">
-        <%= @formatted_estimates&.fetch(long_form_destination)&.fetch( "leave_at" ) %>
+          <%= @formatted_estimates&.fetch(long_form_destination)&.fetch( "leave_at" ) %>
         </h2>
       </div>
     </li>
