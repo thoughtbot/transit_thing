@@ -20,6 +20,18 @@ class Bart::DeparturesController < ApplicationController
       end
     end
 
+    advisories_url = URI.parse(
+      "#{BASE_URL}/bsa.aspx?key=#{KEY}&json=y&cmd=bsa",
+    )
+
+    advisories = JSON.parse(Net::HTTP.get(advisories_url))
+    message = ""
+    advisories.dig("root", "bsa").each do |advisory|
+      message = advisory.dig("description", "#cdata-section")
+    end
+    if message && message != "No delays reported."
+      @advisory = message
+    end
     @sorted_estimates = formatted_estimates.sort_by {|k,v| v.first["minutes"].to_i}
   end
 

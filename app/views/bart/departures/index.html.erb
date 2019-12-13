@@ -1,11 +1,16 @@
 <head>
-  <meta http-equiv="refresh" content="15">
+  <meta http-equiv="refresh" content="60">
 </head>
-<!-- <div class="advisory"> -->
-<!--   <p> -->
-<!--     🚨 Be Advised. Bart isn't working 🚨 -->
-<!--   </p> -->
-<!-- </div> -->
+
+<% if @advisory %>
+  <div class="advisory">
+    <p>
+      🚨 <%= @advisory %> 🚨
+    </p>
+  </div>
+<%end %>
+
+
 <ol class="departures">
   <% @sorted_estimates.each do |destination, estimate| %>
     <li class="departures-item bart--<%= estimate.first.fetch( "color" ) %>">
