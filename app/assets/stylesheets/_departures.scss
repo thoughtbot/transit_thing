@@ -3,18 +3,29 @@
 }
 
 .departures-item {
+  border-bottom: 1px solid #eee;
   display: grid;
   grid-template-columns: 1fr min-content;
   padding: 3vw;
 }
 
-.departures-item-destination {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: min-content 1fr;
+.departures-item-destination-icon {
+  align-items: center;
+  display: flex;
+  grid-area: icon;
+
+  svg {
+    height: 3.5vw;
+    width: 3.5vw;
+  }
+
+  g {
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
 }
 
-.departures-item-destination-icon,
+.departures-item-destination-icon g,
 .departures-item-destination-text {
   color: currentColor;
   fill: currentColor;
@@ -22,10 +33,15 @@
 
 .departures-item-destination-text {
   font-size: 5vw;
+  grid-area: destination;
+  margin-bottom: 0;
 }
 
 .departures-item-station {
-  font-size: 3vw;
+  font-size: 2vw;
+  font-weight: 300;
+  grid-area: station;
+  letter-spacing: 0.15vw;
 }
 
 .departures-item-station,
@@ -35,21 +51,36 @@
 }
 
 .departures-item-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 
 .departures-item-time-display {
   font-size: 5vw;
+  margin: 0;
 }
 
 .departures-item-time-label {
+  color: #aaa;
   font-size: 2vw;
   letter-spacing: 0.3vw;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.departures-item-type {
-  font-size: 3vw;
+.departures-item-train {
+  display: grid;
+  gap: 1vw;
+  grid-template-columns: min-content 1fr;
+  grid-template-areas:
+    ". type"
+    "icon destination"
+    ". station";
 }
 
+.departures-item-type {
+  font-size: 3vw;
+  grid-area: type;
+}
