@@ -1,9 +1,9 @@
 <head>
-  <!-- <meta http&#45;equiv="refresh" content="15"> -->
+  <meta http-equiv="refresh" content="15">
 </head>
 <ol class="departures">
-  <%= @LONG_FORM_DESTINATIONS.each do |long_form_destination| %>
-    <li class="departures-item bart--<%= @formatted_estimates&.fetch(long_form_destination)&.fetch( 'color' ) %>">
+  <% @formatted_estimates.each do |destination, estimate| %>
+    <li class="departures-item bart--<%= estimate.first.fetch( 'color' ) %>">
       <div class="departures-item-train">
         <h3 class="departures-item-type">Bart</h3>
         <span class="departures-item-destination-icon">
@@ -14,13 +14,13 @@
             </g>
           </svg>
         </span>
-        <h1 class="departures-item-destination-text"><%= long_form_destination %></h1>
+        <h1 class="departures-item-destination-text"><%= destination %></h1>
         <h3 class="departures-item-station">Powell St.</h3>
       </div>
       <div class="departures-item-time">
         <span class="departures-item-time-label">Leave at</span>
         <h2 class="departures-item-time-display">
-          <%= @formatted_estimates&.fetch(long_form_destination)&.fetch( "leave_at" ) %>
+          <%= estimate.first&.fetch( "leave_at" ) %>
         </h2>
       </div>
     </li>

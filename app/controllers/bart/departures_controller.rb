@@ -7,17 +7,18 @@ class Bart::DeparturesController < ApplicationController
   )
 
   DESTINATIONS = ["ANTC", "NCON", "PHIL", "PITT", "RICH", "24TH", "SFIA", "DALY", "DUBL"].freeze
-  LONG_FORM_DESTINATIONS = ["Antioch", "North Concord", "Pleasant Hill", "Pittsburg", "Richmond", "24th Street", "SFO", "Daly City", "Dublin"].freeze
+  LONG_FORM_DESTINATIONS = ["Antioch", "North Concord/Martinez", "Pleasant Hill", "Pittsburg/Bay Point", "Richmond", "24th St. Mission (SF)", "San Francisco Int'l Airport", "Daly City", "Dublin/Pleasanton"].freeze
 
   def index
     response = JSON.parse(Net::HTTP.get(ESTIMATES_URI))
     estimates = build_estimates(response)
     @formatted_estimates = format_estimates(estimates)
     LONG_FORM_DESTINATIONS.each do |destination|
-      nearest_train = @formatted_estimates[destination]&.sort_by{|estimate| estimate["eta"]}&.first
-      @formatted_estimates[destination] = nearest_train
+      estimates = @formatted_estimates[destination]&.sort_by{|estimate| estimate["eta"]}
+      if !estimates
+        @formatted_estimates.delete(destination)
+      end
     end
-    @LONG_FORM_DESTINATIONS = LONG_FORM_DESTINATIONS
   end
 
   def build_estimates(response)
