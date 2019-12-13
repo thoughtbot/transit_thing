@@ -40,7 +40,7 @@ class Bart::DeparturesController < ApplicationController
             eta = 0
           end
         }
-        match.fetch("estimate").reject {|estimate| estimate["eta"] < 0}
+        match.fetch("estimate").reject! {|estimate| estimate["eta"] < 0}
         match.fetch("estimate").each do |estimate|
           trains << estimate.merge("destination" => match.fetch("destination"))
         end
