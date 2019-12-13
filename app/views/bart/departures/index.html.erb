@@ -7,7 +7,7 @@
 <!--   </p> -->
 <!-- </div> -->
 <ol class="departures">
-  <% @formatted_estimates.each do |destination, estimate| %>
+  <% @sorted_estimates.each do |destination, estimate| %>
     <li class="departures-item bart--<%= estimate.first.fetch( "color" ) %>">
       <div class="departures-item-train">
         <h3 class="departures-item-type">Bart</h3>

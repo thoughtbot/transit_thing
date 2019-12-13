@@ -12,13 +12,15 @@ class Bart::DeparturesController < ApplicationController
   def index
     response = JSON.parse(Net::HTTP.get(ESTIMATES_URI))
     estimates = build_estimates(response)
-    @formatted_estimates = format_estimates(estimates)
+    formatted_estimates = format_estimates(estimates)
     LONG_FORM_DESTINATIONS.each do |destination|
-      estimates = @formatted_estimates[destination]&.sort_by{|estimate| estimate["eta"]}
+      estimates = formatted_estimates[destination]&.sort_by{|estimate| estimate["eta"]}
       if !estimates
-        @formatted_estimates.delete(destination)
+        formatted_estimates.delete(destination)
       end
     end
+
+    @sorted_estimates = formatted_estimates.sort_by {|k,v| v.first["minutes"].to_i}
   end
 
   def build_estimates(response)
