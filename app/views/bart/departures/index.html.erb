@@ -12,12 +12,11 @@
   <% @sorted_estimates.each do |destination, estimate| %>
     <li class="departures-item bart--<%= estimate.first.fetch( "color" ) %>">
       <div class="departures-item-train">
-        <span class="departures-item-destination-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <g stroke-linecap="round" stroke-linejoin="round" fill="none">
-              <circle cx="12.001" cy="11.998" r="11.5" />
-              <path d="M15.501 14.498l-3.5-4.5-3.5 4.5h-4l7.5-9 7.5 9z" fill="#fff" />
-            </g>
+        <span class="departures-item-destination-icon--<%= estimate.first.fetch( "direction" ) %> departures-item-destination-icon">
+          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+              <g fill="#FFFFFF">
+                  <path d="M12.001,0.498 C18.3522746,0.498 23.501,5.64672538 23.501,11.998 C23.501,18.3492746 18.3522746,23.498 12.001,23.498 C5.64972538,23.498 0.501,18.3492746 0.501,11.998 C0.501,5.64672538 5.64972538,0.498 12.001,0.498 Z M12.001,6.498 L4.501,15.498 L8.501,15.498 L12.001,10.998 L15.501,15.498 L19.501,15.498 L12.001,6.498 Z" id="Combined-Shape"></path>
+              </g>
           </svg>
         </span>
         <h1 class="departures-item-destination-text"><%= destination %></h1>
